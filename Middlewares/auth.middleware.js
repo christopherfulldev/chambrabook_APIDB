@@ -2,7 +2,7 @@ const jwt = require("jonsonwebtoken");
 
 const auth = (require, response, next) => {
     const token = require.get("Autorization");
-    !token && reponse.status(401).json({message: "Request without token"}); 
+    token && reponse.status(401).json({message: "Request without token"}); 
 
     const tokenWithoutBearer = token.subString(6);
 
