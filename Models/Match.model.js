@@ -1,9 +1,9 @@
 const {Schema, model} = require("mongoose");
 
 const matchSchema = new Schema ({
-    profileID: [{type: Schema.Types.ObjectId,
+    profileID: {type: Schema.Types.ObjectId,
         ref: "User",
-        required: true }]
+        required: true }
 })
 
 module.exports = model("Match", matchSchema);
