@@ -1,13 +1,30 @@
 const User = require("../Models/User.model");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.userAuth = async (request, response, next) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (!user) {
-      throw new Error('invalid user name');
-    }
-
+    const {userName, password} = request.body;
+    try {
+        const user = await User.findOne({userName});
+        if (!user) {
+            throw new Error('invalid user name');
+          };
+        const compareHash = bcrypt.compareSync(password, passwordHash);
+        if(!compareHash){
+            throw new Error("User name or password incorrect");
+        };
+        const payload = {
+            id: user.id,
+            username: user.userName
+        };
+        const token = jwt.sign(
+            payload,
+            process.env.SECRET_JWT,
+            {expiresIn: "365day"}
+        );
+    } catch (error) {
+        response.status(400).json({msg:"error.message"});
+    };
 }
 
 exports.createUser = async (request, response, next) => {
@@ -36,5 +53,5 @@ exports.createUser = async (request, response, next) => {
 }
 
 exports.userLogin = async (request, response, next) => {
-    
+    const user = await User.findOne({userName});
 }

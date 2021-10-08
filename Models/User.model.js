@@ -5,7 +5,8 @@ const userSchema = new Schema({
     userName: {type: String, 
         unique: true,
         required: [true, "User name is required"],
-        trim: true},
+        //trim: true
+    },
         age: {type: String},
         albuns: [{type: Schema.Types.ObjectId, 
         ref: "Album"}],

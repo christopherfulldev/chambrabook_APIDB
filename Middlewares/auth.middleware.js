@@ -1,22 +1,25 @@
-const jwt = require("jonsonwebtoken");
+const jwt = require("jsonwebtoken");
 
-const auth = (require, response, next) => {
-    const token = require.get("Autorization");
-    token && reponse.status(401).json({message: "Request without token"}); 
+const auth = (request, response, next) => {
+    const token = request.get("Authorization");
+    
+    if(!token) { 
+        response.status(401).json({msg: "Request without token"})
+    }; 
 
     const tokenWithoutBearer = token.subString(6);
 
     try {
         const decodedToken = jwt.verify(
             tokenWithoutBearer,
-            process.env.Secret_JWT
+            process.env.SECRET_JWT,
         );
 
         request.user = {... decodedToken};
         next();
 
     } catch (error) {
-        response.status(401).json({message: "Not Authorized", error})
+        response.status(401).json({msg: "Not Authorized", error})
     }
 }
 
