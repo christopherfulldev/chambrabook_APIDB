@@ -2,31 +2,36 @@ const User = require("../Models/User.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+//autenticação de usuario 
 exports.userAuth = async (request, response, next) => {
-    const {userName, password} = request.body;
+    const {username, password} = request.body;
     try {
-        const user = await User.findOne({userName});
+        const user = await User.findOne({username});
         if (!user) {
-            throw new Error('invalid user name');
-          };
-        const compareHash = bcrypt.compareSync(password, passwordHash);
+            throw new Error("Invalid username");
+           };
+        const compareHash = bcrypt.compareSync(password, user.passwordHash);
         if(!compareHash){
-            throw new Error("User name or password incorrect");
+            throw new Error({msg:"Password incorrect", error:error.message});
         };
         const payload = {
             id: user.id,
             username: user.userName
         };
+        console.log(payload);
         const token = jwt.sign(
             payload,
             process.env.SECRET_JWT,
-            {expiresIn: "365day"}
+            {expiresIn: '1day'}
         );
+        response.status(200).json({payload, token});    
+        console.log(token, payload);
     } catch (error) {
-        response.status(400).json({msg:"error.message"});
+        response.status(400).json({msg:"msg: Error while creating user, try again.", error:error.message});
     };
 }
 
+//cria usario no banco
 exports.createUser = async (request, response, next) => {
     const {name, password, userName, confirmPassword, email, age, phoneNumber, profilePhoto} = request.body
     try {
@@ -52,6 +57,38 @@ exports.createUser = async (request, response, next) => {
     };
 }
 
-exports.userLogin = async (request, response, next) => {
-    const user = await User.findOne({userName});
+//encontrar um usuario
+exports.UserFinder = async (request, response, next) => {
+    const {id} = request.params;
+    try {
+        const findUser = await User.findOne(id);
+        response.status(200).json(findUser);
+    } catch (error) {
+        response.status(500).json({msg: "User not found, check informations and try again", error:error.message});
+    }
 }
+
+//upload de informações de usuario
+exports.userUpdater = async (request, response, next) => {
+    const {id} = request.params;
+    const payload = request.body;
+    try {
+        const userUpdate = await User.findByIdAndUpdate({_id:id}, payload, {new: true})
+        reponse.status(200).json(userUpdate);
+    } catch (error) {
+        response.status(500).json({msg:"Error while update, try again", error:error.message});
+    }
+};
+
+//deleta um usuario no banco
+exports.userDelete = async (request, response, next) => {
+    const {id} = request.params;
+    try {
+        await User.findByIdAndDelete(id);
+        response.status(204).json();    
+    } catch (error) {
+        response.status(500).json({msg:"Failed to delete, try again.", error:error.message});
+    }
+}
+
+
