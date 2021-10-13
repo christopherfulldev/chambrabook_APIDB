@@ -12,7 +12,7 @@ exports.userAuth = async (request, response, next) => {
            };
         const compareHash = bcrypt.compareSync(password, user.passwordHash);
         if(!compareHash){
-            throw new Error({msg:"Password incorrect", error:error.message});
+            throw new Error("Password incorrect");
         };
         const payload = {
             id: user.id,
@@ -27,18 +27,14 @@ exports.userAuth = async (request, response, next) => {
         response.status(200).json({payload, token});    
         console.log(token, payload);
     } catch (error) {
-        response.status(400).json({msg:"msg: Error while creating user, try again.", error:error.message});
+        response.status(400).json({msg:"Error while log user, try again.", error:error.message});
     };
 }
 
 //cria usario no banco
 exports.createUser = async (request, response, next) => {
-    const {name, password, userName, confirmPassword, email, age, phoneNumber, profilePhoto} = request.body
+    const {name, password, userName, confirmPassword, email, age, phoneNumber, profilePhoto} = request.body;
     try {
-        //const userValidation = await User.findOne({userName});
-        // if (userName){tratamento não necessario porque o valor da chave é tido como unique no model
-        //     throw new Error("User name alredy exists"); 
-        // }
         const salt = await bcrypt.genSalt(8);
         const passwordHash = await bcrypt.hash(password, salt);
         const newUser = await User.create({
@@ -58,11 +54,15 @@ exports.createUser = async (request, response, next) => {
 }
 
 //encontrar um usuario
-exports.UserFinder = async (request, response, next) => {
-    const {id} = request.params;
+exports.userFinder = async (request, response, next) => {
+    const {username} = request.body;
+    if(!username){
+        throw new Error("Username is require, insert one and try again");
+    }
     try {
-        const findUser = await User.findOne(id);
-        response.status(200).json(findUser);
+        const foundUser = await User.findOne({username});
+        const {name, userName, age, profilePhoto, email, phoneNumber} = foundUser;
+        response.status(200).json({name, userName, age, profilePhoto, email, phoneNumber});
     } catch (error) {
         response.status(500).json({msg: "User not found, check informations and try again", error:error.message});
     }
@@ -71,10 +71,10 @@ exports.UserFinder = async (request, response, next) => {
 //upload de informações de usuario
 exports.userUpdater = async (request, response, next) => {
     const {id} = request.params;
-    const payload = request.body;
+    const payloadToUpdate = request.body;
     try {
-        const userUpdate = await User.findByIdAndUpdate({_id:id}, payload, {new: true})
-        reponse.status(200).json(userUpdate);
+        const userUpdate = await User.findByIdAndUpdate(id, payloadToUpdate, {new: true})
+        response.status(200).json({msg:"User sucessefull updated", username:`${payloadToUpdate.username}`});
     } catch (error) {
         response.status(500).json({msg:"Error while update, try again", error:error.message});
     }
@@ -82,10 +82,11 @@ exports.userUpdater = async (request, response, next) => {
 
 //deleta um usuario no banco
 exports.userDelete = async (request, response, next) => {
-    const {id} = request.params;
+    const {id} = request.params;//bonus add func que encontra e deleta as referencias
+    console.log(id);
     try {
         await User.findByIdAndDelete(id);
-        response.status(204).json();    
+        response.status(204).json({msg:"User sucessefull deleted"});    
     } catch (error) {
         response.status(500).json({msg:"Failed to delete, try again.", error:error.message});
     }

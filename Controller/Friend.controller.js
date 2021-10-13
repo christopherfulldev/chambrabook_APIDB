@@ -11,6 +11,7 @@ exports.friendAdder = async (request, response, next) => {
     }
 };
 
+//encontra um amigo
 exports.friendFinder = async (request, response, next) => {
     const {id} = request.params;
     try {
@@ -20,16 +21,7 @@ exports.friendFinder = async (request, response, next) => {
     }
 };
 
-exports.friendUploader = async(request, response, next) => {
-    const {id} = request.params;
-    try {
-        const updatedFriend = await Friend.findByIdAndUpdate({_id: id}, payload, {new: true});
-        response.status(201).json(updatedFriend);
-    } catch (error) {
-        reponse.status(500).json({msg:"Error while update friend, try again", error:error.message})
-    }
-};
-
+//deleta um amigo
 exports.friendDeleter = async (request, response, next) => {
     const {id} = request.params;
     try {
