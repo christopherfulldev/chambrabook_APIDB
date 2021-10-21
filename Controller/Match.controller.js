@@ -1,7 +1,7 @@
 const Match = require("../Models/Match.model");
 
 exports.matchAdder = async(request, response, next) => {
-    const {id} = request.params;
+    const {id} = request.body;
     try {
         await Match.create(id);
         reponse.status(201).json({msg:"Match created"});

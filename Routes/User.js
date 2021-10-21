@@ -10,6 +10,6 @@ router.post("/login", userController.userAuth);
 //rotas referente a opções com usuario
 router.delete("/user/:id", authMiddleware, userController.userDelete);
 router.put("/user/:id", authMiddleware, userController.userUpdater);
-router.get("/user/finder", authMiddleware, userController.userFinder);
+router.get("/user/:id/finder", authMiddleware, userController.userFinder);
 
 module.exports = router;
