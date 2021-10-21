@@ -11,6 +11,7 @@ const matchRoutes = require("./Routes/Friend");
 const albumRoutes = require("./Routes/Album");
 
 const app = express();
+
 app.use(cors());
 
 app.use(express.json());
