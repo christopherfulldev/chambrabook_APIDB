@@ -55,7 +55,7 @@ exports.createUser = async (request, response, next) => {
 exports.userFinder = async (request, response, next) => {
     const {username} = request.params;
     if(!username){
-        throw new Error("Username is require, insert one and try again");
+        throw new Error("Username is required, insert one and try again");
     }
     try {
         const foundUser = await User.findOne({username});
@@ -88,5 +88,17 @@ exports.userDelete = async (request, response, next) => {
         response.status(500).json({msg:"Failed to delete, try again.", error:error.message});
     }
 }
+
+//upload profile imagem
+exports.uploadProfilePic = async (request, response, next) => {
+  const { path } = request.file;
+  const { id } = request.user;
+  try {
+    const updatedProfilePicUser = await User.findByIdAndUpdate(id, { profilePicture: path }, { new: true });
+    res.status(200).json(updatedProfilePicUser);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
 

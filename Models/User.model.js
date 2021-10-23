@@ -26,6 +26,7 @@ const userSchema = new Schema({
         lowercase: true
     },
     phoneNumber: {type: Number},
+    albumList: [{type: Schema.Types.ObjectId, ref:"Album"}],
     matchList: [{type: Schema.Types.ObjectId, ref: "Match"}]                           
 },{
     timestamps:true

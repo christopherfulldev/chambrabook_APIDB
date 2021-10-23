@@ -11,5 +11,6 @@ router.post("/login", userController.userAuth);
 router.delete("/user/:id", authMiddleware, userController.userDelete);
 router.put("/user/:id", authMiddleware, userController.userUpdater);
 router.get("/user/finder/:username", authMiddleware, userController.userFinder);
+router.post("/user/uploadprofilepic/:username", uploadFile.single("image"), userController.profilePicUploader);
 
 module.exports = router;

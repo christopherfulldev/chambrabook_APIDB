@@ -12,7 +12,8 @@ cloudinary.config({
 const storage = new CloudinaryStorage ({
     cloudinary,
     params: {
-        folder: "ChambraBook_APIDB"
+        folder: "ChambraBook_APIDB",
+        resource_type: "image"
     }
 });
 
