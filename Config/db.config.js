@@ -5,5 +5,4 @@ const connect = (async () => { //porque sempre quero ativar o DB, utilizada IIFE
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
-    console.log(`Data Base Connected: ${connection.connections[0].name}`);
 }) ();

@@ -24,5 +24,4 @@ app.use(albumRoutes);
 
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server listen on Port ${process.env.PORT}`)
 });

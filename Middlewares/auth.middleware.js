@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const auth = (request, response, next) => {
-    const token = request.get("Authorization");
+    const token = request.headers.authorization;
     if(!token) { 
         response.status(401).json({msg:"Request without token"});
     }; 

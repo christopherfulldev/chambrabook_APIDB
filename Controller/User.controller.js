@@ -18,14 +18,12 @@ exports.userAuth = async (request, response, next) => {
             id: user.id,
             username: user.userName
         };
-        console.log(payload);
         const token = jwt.sign(
             payload,
             process.env.SECRET_JWT,
             {expiresIn: '1day'}
         );
         response.status(200).json({payload, token});    
-        console.log(token, payload);
     } catch (error) {
         response.status(400).json({msg:"Error while log user, try again.", error:error.message});
     };
@@ -55,7 +53,7 @@ exports.createUser = async (request, response, next) => {
 
 //encontrar um usuario
 exports.userFinder = async (request, response, next) => {
-    const {username} = request.body;
+    const {username} = request.params;
     if(!username){
         throw new Error("Username is require, insert one and try again");
     }
@@ -83,7 +81,6 @@ exports.userUpdater = async (request, response, next) => {
 //deleta um usuario no banco
 exports.userDelete = async (request, response, next) => {
     const {id} = request.params;//bonus add func que encontra e deleta as referencias
-    console.log(id);
     try {
         await User.findByIdAndDelete(id);
         response.status(204).json({msg:"User sucessefull deleted"});    
