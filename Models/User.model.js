@@ -1,19 +1,20 @@
 const {Schema, model} = require("mongoose");
 
 const userSchema = new Schema({
-    name: String,
+    name: {type: String},
+    lastName:{type: String, 
+        required: true},
     userName: {type: String, 
         unique: true,
         required: [true, "User name is required"],
-        trim: true},
+        trim: true,
+        min: 3,
+        max: 20},
         age: {type: String},
-        albuns: [{type: Schema.Types.ObjectId, 
+    albuns: [{type: Schema.Types.ObjectId, 
         ref: "Album"}],
-    profilePhoto: {type: String,},
     friendsList: {type: Schema.Types.ObjectId, 
         ref: "Friend"},
-        name: {type: String, 
-        required: true},
     passwordHash: {
         type: String,
         required: [true, 'Password is required.']
@@ -25,9 +26,17 @@ const userSchema = new Schema({
         trim: true,
         lowercase: true
     },
+    profilePhoto: {type: String, 
+        default: "" },
     phoneNumber: {type: Number},
-    albumList: [{type: Schema.Types.ObjectId, ref:"Album"}],
-    matchList: [{type: Schema.Types.ObjectId, ref: "Match"}]                           
+    followers: {type: Array, 
+        default: [] },
+    following: {type: Array, 
+        default:[] },
+    albumList: [{type: Schema.Types.ObjectId, 
+        ref:"Album"}],
+    matchList: [{type: Schema.Types.ObjectId, 
+        ref: "Match"}]                           
 },{
     timestamps:true
 });

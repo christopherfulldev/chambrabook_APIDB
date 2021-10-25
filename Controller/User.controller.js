@@ -90,15 +90,18 @@ exports.userDelete = async (request, response, next) => {
 }
 
 //upload profile imagem
-exports.uploadProfilePic = async (request, response, next) => {
-  const { path } = request.file;
-  const { id } = request.user;
+exports.uploadPicture = async (request, response, next) => {
+  const { path: url="" } = request.file;
+  const {title} = request.body;
+  const { id, username } = request.user;
   try {
-    const updatedProfilePicUser = await User.findByIdAndUpdate(id, { profilePicture: path }, { new: true });
-    res.status(200).json(updatedProfilePicUser);
+    const updateProfilePicUser = await User.findByIdAndUpdate(
+        id, {$push: { profilePicture: path }}, { new: true });
+    res.status(200).json(updateProfilePicUser);
   } catch (error) {
     res.status(500).json(error);
-  }
+  } 
+  await Album.create({user:_id, url, title});
 };
 
 
