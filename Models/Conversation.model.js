@@ -1,9 +1,9 @@
 const {Schema, model} = require("mongoose");
 
-const MessageSchema =  new Schema({
+const ConversationSchema = ({
     conversationID: {type: String},
     sender:{type: String},
     text:{type: String}
 })
 
-module.exports = model("Message", MessageSchema);
+module.exports = model("Conversation", ConversationSchema);

@@ -1,4 +1,4 @@
-const Conversation = require("../Models/Conversention.model");
+const Conversation = require("../Models/Conversation.model");
 
 //inicia novo chat
 exports.newConversation = async (request, response, next) => {

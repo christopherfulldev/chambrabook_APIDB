@@ -7,10 +7,13 @@ const morgan = require('morgan')
 const cors = require("cors");
 const authMiddleware = require("./Middlewares/auth.middleware");
 
-const userRoutes = require("./Routes/User");
-const friendRoutes = require("./Routes/Friend");
-const matchRoutes = require("./Routes/Friend");
 const albumRoutes = require("./Routes/Album");
+const conversationRoutes = require("./Routes/Conversation");
+const friendRoutes = require("./Routes/Friend");
+const matchRoutes = require("./Routes/Match");
+const messagesRoutes = require("./Routes/Messages");
+const postRoutes = require("./Routes/Post");
+const userRoutes = require("./Routes/User");
 
 const app = express();
 
