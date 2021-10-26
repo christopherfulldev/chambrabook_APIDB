@@ -6,9 +6,9 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-<img src="./Screenshot from 2021-10-25 19-31-07.png" alt="">
+<img src="./public/chambra_book_logo.png" alt="">
 
-> Interface criada usando "MONGODB, Mongoose, Express, Cloudinary" durante projeto de conculsão "Ironhack FullStack Web Development Course".
+> Data base criada usando "MONGODB, Mongoose, Express, Cloudinary" durante projeto de conculsão "Ironhack FullStack Web Development Course".
 
 ### Ajustes e melhorias
 
@@ -21,13 +21,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 ## 💻 Pré-requisitos
 
-Para utilizar basta acessar a API integrada "https://chambrabook.herokuapp.com/" e realizar cadastro.
-
-## 🚀 Instalando <ChambraBook>
-Nenhuma instalação é necessaria.
-
-## ☕ Usando <ChambraBook>
-Nossa interface grafica é intuitiva, o que torna facil sua utilização. Acesse o link, realize o cadastro/register e desfrute de bons momentos junto aos amigos.
+Basta acessar a API integrada "https://chambrabook.herokuapp.com/" e realizar cadastro.
 
 ## 📫 Contribuindo com <ChambraBook>
 
@@ -44,7 +38,8 @@ Como alternativa, consulte a documentação do GitHub em [como criar uma solicit
 ## 🤝 Colaboradores
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
-Gabriel Sicuto, Daniel (DK) Kunrath, Julia Foresti, Larry Page & Sergey Brin, Luiz Filho, Safaky.
+Gabriel Sicuto, Daniel (DK) Kunrath, Julia Foresti, Larry Page & Sergey Brin(rs), Luiz Filho, Safaky.
+
 ## 😄 Seja um dos contribuidores<br>
 
 Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
