@@ -31,19 +31,19 @@ exports.userAuth = async (request, response, next) => {
 
 //cria usario no banco
 exports.createUser = async (request, response, next) => {
-    const {name, password, userName, confirmPassword, email, age, phoneNumber, profilePhoto} = request.body;
+    const {name, lastName, password, userName, email, age} = request.body;
     try {
         const salt = await bcrypt.genSalt(8);
         const passwordHash = await bcrypt.hash(password, salt);
         const newUser = await User.create({
             name,
+            lastName,
             passwordHash, 
             userName, 
             email, 
             age,
-            profilePhoto,
-            phoneNumber});
-        response.status(201).json({userName: newUser.userName});
+            });
+        response.status(201).json({userName: newUser.userName, name, lastName});
     } catch (error) {
         response.status(500).json({
             msg: "Error while creating user, try again", 
@@ -59,8 +59,8 @@ exports.userFinder = async (request, response, next) => {
     }
     try {
         const foundUser = await User.findOne({username});
-        const {name, userName, age, profilePhoto, email, phoneNumber} = foundUser;
-        response.status(200).json({name, userName, age, profilePhoto, email, phoneNumber});
+        const {name, lastName, userName, age, profilePhoto, email, phoneNumber} = foundUser;
+        response.status(200).json({name, lastName, age, profilePhoto, photos, email, phoneNumber, followers, following, matchList, albumList});
     } catch (error) {
         response.status(500).json({msg: "User not found, check informations and try again", error:error.message});
     }

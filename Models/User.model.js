@@ -2,8 +2,7 @@ const {Schema, model} = require("mongoose");
 
 const userSchema = new Schema({
     name: {type: String},
-    lastName:{type: String, 
-        required: true},
+    lastName:{type: String},
     userName: {type: String, 
         unique: true,
         required: [true, "User name is required"],
@@ -11,8 +10,7 @@ const userSchema = new Schema({
         min: 3,
         max: 20},
         age: {type: String},
-    albuns: [{type: Schema.Types.ObjectId, 
-        ref: "Album"}],
+    photos: {type: Array, default: []},
     friendsList: {type: Schema.Types.ObjectId, 
         ref: "Friend"},
     passwordHash: {
