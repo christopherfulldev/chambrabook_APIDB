@@ -11,7 +11,7 @@ router.post("/login", userController.userAuth);
 //rotas referente a opções com usuario
 router.delete("/user/:id", authMiddleware, userController.userDelete);
 router.put("/user/:id", authMiddleware, userController.userUpdater);
-router.get("/user/finder/:id", authMiddleware, userController.userFinder);
+router.get("/user/finder/:username", authMiddleware, userController.userFinder);
 router.patch("/user/uploadpicture/", uploadFile.single("image"), async()=>userController.profilePicUploadernpm);
 
 module.exports = router;
