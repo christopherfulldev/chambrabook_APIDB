@@ -17,6 +17,15 @@ const storage = new CloudinaryStorage ({
     }
 });
 
-const uploadFile = multer({storage});
+const storagePhotos = new CloudinaryStorage ({
+    cloudinary,
+    params: {
+        folder: "ChambraBook_APIDB_photos",
+        resource_type: "image"
+    }
+});
 
-module.exports = uploadFile;
+const uploadFile = multer({storage});
+const uploadPhoto = multer({storage});
+module.exports = {uploadFile, uploadPhoto};
+
