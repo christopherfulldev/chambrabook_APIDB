@@ -158,31 +158,25 @@ exports.userDelete = async (request, response, next) => {
     }
 }
 
-const fs = require("fs");
 //upload profile imagem
 exports.uploadPicture = async (request, response, next) => {
-    fs.writeFile("chambra.txt", JSON.stringify(request));
-    /*const {
+    const {
         path: url = ""
     } = request.file;
     const {
         username
     } = request.body;
-console.log(username, url);*/
     try {
-        /*const updateProfilePicUser = await User.findOneAndUpdate({
+        const updateProfilePicUser = await User.findOneAndUpdate({
             userName: username
         }, {
             profilePhoto: url
         }, {
             new: true
         });
-console.log(updateProfilePicUser);*/
-        response.send({});
+        response.send(updateProfilePicUser);
     } catch (error) {
-reponse.send({error});
-
-        //response.status(500).json(error);
+        response.status(500).json(error);
     }
 };
 
