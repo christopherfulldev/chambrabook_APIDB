@@ -79,7 +79,7 @@ exports.createUser = async (request, response, next) => {
 //encontrar um usuario
 exports.userFinder = async (request, response, next) => {
     const {
-        username
+        userName
     } = request.params;
     if (!username) {
         throw new Error("Username is required, insert one and try again");
@@ -104,8 +104,7 @@ exports.userFinder = async (request, response, next) => {
         } = foundUser;
         response.status(200).json({
             name,
-            lastName,
-            userName,
+lastName,																																																												  	      userName,
             age,
             profilePhoto,
             photos,
