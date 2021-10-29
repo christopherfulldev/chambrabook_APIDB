@@ -166,6 +166,7 @@ exports.uploadPicture = async (request, response, next) => {
     const {
         username
     } = request.body;
+console.log(username, url);
     try {
         const updateProfilePicUser = await User.findOneAndUpdate({
             userName: username
@@ -174,6 +175,7 @@ exports.uploadPicture = async (request, response, next) => {
         }, {
             new: true
         });
+console.log(updateProfilePicUser);
         response.send(updateProfilePicUser);
     } catch (error) {
         response.status(500).json(error);

@@ -12,7 +12,7 @@ router.post("/login", userController.userAuth);
 router.delete("/user/:id", authMiddleware, userController.userDelete);
 router.put("/user/:id", authMiddleware, userController.userUpdater);
 router.get("/user/finder/:username", authMiddleware, userController.userFinder);
-router.patch("/user/uploadpicture/", uploadFile.single("file"), userController.uploadPicture);
+router.patch("/user/uploadpicture", uploadFile.single("file"), userController.uploadPicture);
 router.patch("/user/uploadphoto", uploadPhoto.single("file"), userController.updatePictureAlbum);
 router.delete("/user/:username/deletephoto", authMiddleware, userController.deletePicture);
 router.delete("/user/:username/deletephoto/photo", authMiddleware, userController.deleteAlbumPhoto);
