@@ -79,7 +79,7 @@ exports.createUser = async (request, response, next) => {
 //encontrar um usuario
 exports.userFinder = async (request, response, next) => {
     const {
-        userName
+        username
     } = request.params;
     if (!username) {
         throw new Error("Username is required, insert one and try again");
