@@ -105,6 +105,7 @@ exports.userFinder = async (request, response, next) => {
         response.status(200).json({
             name,
             lastName,
+            userName,
             age,
             profilePhoto,
             photos,
