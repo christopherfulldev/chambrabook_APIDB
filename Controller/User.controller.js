@@ -160,7 +160,7 @@ exports.userDelete = async (request, response, next) => {
 
 //upload profile imagem
 exports.uploadPicture = async (request, response, next) => {
-    console.log(request.file);
+    console.log(request);
     const {
         path: url = ""
     } = request.file;
