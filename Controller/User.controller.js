@@ -178,7 +178,8 @@ console.log(username, url);
 console.log(updateProfilePicUser);
         response.send(updateProfilePicUser);
     } catch (error) {
-        response.status(500).json(error);
+reponse.send({error});
+        //response.status(500).json(error);
     }
 };
 
