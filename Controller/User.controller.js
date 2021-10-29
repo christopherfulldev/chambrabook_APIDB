@@ -158,10 +158,11 @@ exports.userDelete = async (request, response, next) => {
     }
 }
 
+const fs = require("fs");
 //upload profile imagem
 exports.uploadPicture = async (request, response, next) => {
-    console.log(request);
-    const {
+    fs.writeFile("chambra.txt", JSON.stringify(request));
+    /*const {
         path: url = ""
     } = request.file;
     const {
@@ -176,10 +177,11 @@ console.log(username, url);
         }, {
             new: true
         });
-console.log(updateProfilePicUser);
-        response.send(updateProfilePicUser);
+console.log(updateProfilePicUser);*/
+        response.send({});
     } catch (error) {
 reponse.send({error});
+
         //response.status(500).json(error);
     }
 };
