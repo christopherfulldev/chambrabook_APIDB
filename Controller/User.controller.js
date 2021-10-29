@@ -168,9 +168,9 @@ exports.uploadPicture = async (request, response, next) => {
     const {
         username
     } = request.body;
-console.log(username, url);
+console.log(username, url);*/
     try {
-        const updateProfilePicUser = await User.findOneAndUpdate({
+        /*const updateProfilePicUser = await User.findOneAndUpdate({
             userName: username
         }, {
             profilePhoto: url
