@@ -86,7 +86,7 @@ exports.userFinder = async (request, response, next) => {
     }
     try {
         const foundUser = await User.findOne({
-            username
+            userName: username
         });
         const {
             name,
@@ -94,8 +94,13 @@ exports.userFinder = async (request, response, next) => {
             userName,
             age,
             profilePhoto,
+            photos,
             email,
-            phoneNumber
+            phoneNumber,
+            followers,
+	        following,
+	        matchList,
+	        albumList
         } = foundUser;
         response.status(200).json({
             name,
