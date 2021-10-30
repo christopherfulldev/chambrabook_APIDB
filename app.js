@@ -28,7 +28,8 @@ app.use(friendRoutes);
 app.use(matchRoutes);
 app.use(albumRoutes);
 
-app.use((req, res, next) => {res.sendFile(__dirname + "/public/index.html");});
-
-app.listen(process.env.PORT, () => {
+app.use((req, res, next) => {
+    res.sendFile(__dirname + "/public/index.html");
 });
+
+app.listen(process.env.PORT, () => {});

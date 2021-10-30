@@ -1,8 +1,13 @@
-const {uploadFile, uploadPhoto} = require("../Config/cloundinary.config");
+const {
+    uploadFile,
+    uploadPhoto
+} = require("../Config/cloundinary.config");
 const userController = require("../Controller/User.controller");
 const authMiddleware = require("../Middlewares/auth.middleware");
 
-const {Router} = require("express");
+const {
+    Router
+} = require("express");
 const router = Router();
 //rotas de autenticação e registro de usuario
 router.post("/register", userController.createUser);

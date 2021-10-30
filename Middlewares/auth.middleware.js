@@ -3,19 +3,25 @@ const jwt = require("jsonwebtoken");
 const auth = (request, response, next) => {
     const token = request.headers.authorization;
     console.log(request.headers)
-    if(!token) { 
-        response.status(401).json({msg:"Request without token"});
-    }; 
+    if (!token) {
+        response.status(401).json({
+            msg: "Request without token"
+        });
+    };
     const tokenWithoutBearer = token.split(" ")[1];
     try {
         const decodedToken = jwt.verify(
             tokenWithoutBearer,
             process.env.SECRET_JWT,
         );
-        request.user = {... decodedToken};
+        request.user = {
+            ...decodedToken
+        };
         next();
     } catch (error) {
-        response.status(401).json({msg:"Not Authorized, try again"});
+        response.status(401).json({
+            msg: "Not Authorized, try again"
+        });
     }
 }
 

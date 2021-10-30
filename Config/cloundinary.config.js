@@ -1,5 +1,7 @@
 const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const {
+    CloudinaryStorage
+} = require('multer-storage-cloudinary');
 const multer = require("multer");
 
 cloudinary.config({
@@ -9,7 +11,7 @@ cloudinary.config({
     secure: true
 });
 
-const storage = new CloudinaryStorage ({
+const storage = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: "ChambraBook_APIDB",
@@ -17,7 +19,7 @@ const storage = new CloudinaryStorage ({
     }
 });
 
-const storagePhotos = new CloudinaryStorage ({
+const storagePhotos = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: "ChambraBook_APIDB_photos",
@@ -25,7 +27,13 @@ const storagePhotos = new CloudinaryStorage ({
     }
 });
 
-const uploadFile = multer({storage});
-const uploadPhoto = multer({storage});
-module.exports = {uploadFile, uploadPhoto};
-
+const uploadFile = multer({
+    storage
+});
+const uploadPhoto = multer({
+    storage
+});
+module.exports = {
+    uploadFile,
+    uploadPhoto
+};

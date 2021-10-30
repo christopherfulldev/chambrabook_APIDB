@@ -98,13 +98,14 @@ exports.userFinder = async (request, response, next) => {
             email,
             phoneNumber,
             followers,
-	        following,
-	        matchList,
-	        albumList
+            following,
+            matchList,
+            albumList
         } = foundUser;
         response.status(200).json({
             name,
-lastName,																																																												  	      userName,
+            lastName,
+            userName,
             age,
             profilePhoto,
             photos,
@@ -207,14 +208,19 @@ exports.deleteAlbumPhoto = async (request, response, next) => {
     const {
         username,
     } = request.params;
-    const {urlphoto: photo} = request.query
+    const {
+        urlphoto: photo
+    } = request.query
     try {
-        const updateProfilePicUser = await User.findOneAndUpdate(
-            {
-                userName: username
-            },{
-                $pullAll:{photos: [photo]}
-            }, {new: true})
+        const updateProfilePicUser = await User.findOneAndUpdate({
+            userName: username
+        }, {
+            $pullAll: {
+                photos: [photo]
+            }
+        }, {
+            new: true
+        })
         response.send(updateProfilePicUser);
     } catch (error) {
         response.status(500).json(error);

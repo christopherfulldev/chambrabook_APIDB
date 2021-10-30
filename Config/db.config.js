@@ -5,4 +5,4 @@ const connect = (async () => { //porque sempre quero ativar o DB, utilizada IIFE
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
-}) ();
+})();
